@@ -3,7 +3,13 @@
 ```
 npm i -g yackage
 npm i
+```
+
+Build and test
+
+```
 yackage build out
+yackage start
 ```
 
 https://github.com/yue/node-gui
