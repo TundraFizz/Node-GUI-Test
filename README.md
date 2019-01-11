@@ -2,6 +2,7 @@
 
 ```
 npm i -g yackage
+npm i
 yackage build out
 ```
 
