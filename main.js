@@ -24,36 +24,105 @@ const menu = gui.MenuBar.create([{
 ]);
 
 const win = gui.Window.create({});
-win.setContentSize({width: 400, height: 400});
+win.setContentSize({"width": 400, "height": 400});
 win.onClose = () => gui.MessageLoop.quit();
 
 const contentView = gui.Container.create();
-contentView.setStyle({flexDirection: "row"});
+contentView.setStyle({"flexDirection": "row"});
 win.setContentView(contentView);
 
-let sidebar;
+let sidebar = gui.Container.create();
 
-if(process.platform == "darwin"){
-  sidebar = gui.Vibrant.create();
-  sidebar.setBlendingMode("behind-window");
-  sidebar.setMaterial("dark");
-}else{
-  sidebar = gui.Container.create();
-}
+/*
+ * if(process.platform == "darwin"){
+ *   sidebar = gui.Vibrant.create();
+ *   sidebar.setBlendingMode("behind-window");
+ *   sidebar.setMaterial("dark");
+ * }else{
+ *   sidebar = gui.Container.create();
+ * }
+ */
 
-sidebar.setStyle({padding: 5});
+sidebar.setStyle({
+  "width": 300,
+  "padding": 5,
+  // "flexDirection": "row"
+});
 contentView.addChildView(sidebar);
 
 const edit = gui.TextEdit.create();
 edit.setStyle({"flex": 1});
-contentView.addChildView(edit);
+// contentView.addChildView(edit);
 
 let filename;
 let folder;
 
-const open = gui.Button.create(");
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const testLabel = gui.Label.create("Hello world!");
+
+testLabel.setStyle({
+  // "width" : 80,
+  // "height": 20
+});
+
+const testEntry = gui.Entry.create();
+
+testEntry.setStyle({
+  "width" : 80,
+  "height": 20
+});
+
+const btnRandomize = gui.Button.create({"title": "Randomize", "type": "radio"});
+
+btnRandomize.setStyle({
+  "width" : 50,
+  "height": 20
+});
+
+btnRandomize.setChecked(true);
+
+const btnSavePdf    = gui.Button.create("Save PDF");
+const btnPrintLabel = gui.Button.create("Print Label");
+
+testEntry.onTextChange = (self) => {
+  var newText = self.getText();
+
+  if(newText == "")
+    btnRandomize.setChecked(true);
+  else
+    btnRandomize.setChecked(false);
+}
+
+btnRandomize.onClick = () => {
+  testEntry.setText("");
+}
+
+btnSavePdf.onClick = () => {
+  console.log("Save as .pdf file");
+}
+
+btnPrintLabel.onClick = () => {
+  console.log("Send to printer");
+}
+
+sidebar.addChildView(testLabel);
+sidebar.addChildView(testEntry);
+sidebar.addChildView(btnRandomize);
+sidebar.addChildView(btnSavePdf);
+sidebar.addChildView(btnPrintLabel);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const open = gui.Button.create("");
 open.setImage(gui.Image.createFromPath(__dirname + "/eopen@2x.png"));
-open.setStyle({marginBottom: 5});
+open.setStyle({"marginBottom": 5});
 
 open.onClick = () => {
   const dialog = gui.FileOpenDialog.create();
@@ -82,7 +151,7 @@ open.onClick = () => {
 
 sidebar.addChildView(open);
 
-const save = gui.Button.create(");
+const save = gui.Button.create("");
 save.setImage(gui.Image.createFromPath(__dirname + "/esave@2x.png"));
 
 save.onClick = () => {
@@ -99,7 +168,9 @@ save.onClick = () => {
 }
 
 sidebar.addChildView(save);
-sidebar.setStyle({width: sidebar.getPreferredSize().width});
+sidebar.setStyle({
+  "width": sidebar.getPreferredSize().width
+});
 
 if(process.platform == "darwin")
   gui.app.setApplicationMenu(menu);
