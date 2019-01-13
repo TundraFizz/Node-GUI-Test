@@ -12,6 +12,9 @@ yackage build out
 yackage start
 ```
 
-https://github.com/yue/node-gui
-https://github.com/yue/yackage
-https://libyue.com/docs/latest/js/
+### Useful links
+
+[API Documentation](https://libyue.com/docs/latest/js)
+[Layout System Sandbox](https://yogalayout.com/playground)
+[GitHub: Node GUI](https://github.com/yue/node-gui)
+[GitHub: Yackage](https://github.com/yue/yackage)
